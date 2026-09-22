@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* Estilos globales minimos */
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #fff;
+  color: #222;
+}
+
+/* Estados de solicitudes: color uniforme, sin borde */
+.badge-aprobada,
+.badge-en-revision,
+.badge-pendiente,
+.badge-rechazada {
+  color: #222;
+  border-bottom: none;
+}
+
+.status-pill .status-dot {
+  display: none;
+}
+
+.col-estado {
+  text-align: center;
+}

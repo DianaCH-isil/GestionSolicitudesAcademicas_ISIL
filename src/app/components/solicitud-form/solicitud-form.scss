@@ -1,0 +1,161 @@
+.form-card {
+  width: 100%;
+  border: none;
+}
+
+.form-card-header {
+  margin-bottom: 16px;
+
+  .form-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+  }
+}
+
+.success-message {
+  margin: 12px 0 0 0;
+  padding: 0;
+  text-align: center;
+  color: #2563eb;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+}
+
+.reactive-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &.col-4 { flex: 1 1 calc(33.333% - 12px); min-width: 180px; }
+  &.col-6 { flex: 1 1 calc(50% - 8px); min-width: 240px; }
+  &.col-8 { flex: 2 1 calc(66.666% - 12px); min-width: 280px; }
+  &.col-12 { flex: 1 1 100%; }
+}
+
+.form-label {
+  font-size: 13px;
+  font-weight: bold;
+  color: #222;
+
+  .required-asterisk { color: #dc2626; }
+
+  .badge-auto {
+    margin-left: 6px;
+    font-size: 11px;
+    color: #666;
+    font-weight: normal;
+  }
+}
+
+.label-with-counter {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.char-counter {
+  font-size: 11px;
+  color: #666;
+
+  &.counter-error { color: #dc2626; }
+}
+
+.input-wrapper {
+  position: relative;
+
+  &.disabled-field .form-control {
+    background-color: #f5f5f5;
+    color: #2563eb;
+    font-weight: bold;
+  }
+}
+
+.field-icon {
+  display: none;
+}
+
+.form-control {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  color: #222;
+  background-color: #fff;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: #2563eb;
+  }
+}
+
+.textarea-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.input-wrapper.has-error .form-control {
+  border-color: #dc2626;
+}
+
+.input-wrapper.has-success .form-control {
+  border-color: #16a34a;
+}
+
+.error-feedback {
+  font-size: 12px;
+  color: #dc2626;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #ddd;
+  margin-top: 8px;
+}
+
+.btn-cancel {
+  padding: 6px 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #222;
+  text-decoration: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-submit {
+  padding: 6px 16px;
+  border: 1px solid #2563eb;
+  background-color: #2563eb;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.submit-icon {
+  display: none;
+}

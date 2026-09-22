@@ -1,0 +1,139 @@
+.historial-card {
+  width: 100%;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+
+  .card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+  }
+}
+
+.count-badge {
+  font-size: 12px;
+  color: #666;
+}
+
+.solicitudes-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead tr {
+    border-bottom: 1px solid #222;
+
+    th {
+      padding: 8px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: bold;
+      color: #222;
+    }
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #ddd;
+
+    td {
+      padding: 8px;
+      font-size: 14px;
+      color: #222;
+      vertical-align: middle;
+    }
+  }
+}
+
+.radicado-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: bold;
+}
+
+.file-icon {
+  width: 16px;
+  height: 16px;
+  stroke: #2563eb;
+}
+
+.alumno-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.alumno-icon-wrapper {
+  display: none;
+}
+
+.alumno-codigo {
+  font-weight: bold;
+}
+
+.fecha-text {
+  color: #666;
+}
+
+.col-detalle {
+  text-align: center;
+}
+
+.detail-action-btn {
+  background-color: #2563eb;
+  border: 1px solid #2563eb;
+  border-radius: 0;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 4px 10px;
+
+  &:hover {
+    background-color: #1d4ed8;
+  }
+}
+
+.card-pagination {
+  margin-top: 12px;
+  text-align: right;
+  font-size: 13px;
+  color: #666;
+}
+
+.pagination-controls {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.page-arrow-btn,
+.page-number-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #222;
+  cursor: pointer;
+
+  &:disabled {
+    color: #999;
+    cursor: not-allowed;
+  }
+
+  &.active {
+    background-color: #2563eb;
+    color: #fff;
+    border-color: #2563eb;
+  }
+}
+
+.page-arrow-btn svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}

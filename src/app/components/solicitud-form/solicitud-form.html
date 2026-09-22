@@ -1,0 +1,156 @@
+<section class="form-section">
+  <!-- Tarjeta Contenedora -->
+  <div class="form-card">
+    <!-- Cabecera del Formulario -->
+    <div class="form-card-header">
+      <div class="header-text-group">
+        <h3 class="form-title">Nueva Solicitud</h3>
+      </div>
+    </div>
+
+    <!-- Formulario Reactivo -->
+    <form [formGroup]="solicitudForm" (ngSubmit)="onSubmit()" class="reactive-form" novalidate>
+
+      <div class="form-row">
+
+        <div class="form-group col-4">
+          <label class="form-label">
+            <span>CÓDIGO RADICADO ASIGNADO</span>
+            <span class="badge-auto">Autogenerado</span>
+          </label>
+          <div class="input-wrapper disabled-field">
+            <svg class="field-icon icon-blue" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+            </svg>
+            <input type="text" class="form-control" formControlName="codigoRadicado" readonly />
+          </div>
+        </div>
+
+        <!-- Tipo de Trámite Académico -->
+        <div class="form-group col-8">
+          <label for="tipoTramite" class="form-label">
+            <span>TIPO DE TRÁMITE ACADÉMICO</span>
+            <span class="required-asterisk">*</span>
+          </label>
+          <div class="input-wrapper" [class.has-error]="esInvalido('tipoTramite')"
+            [class.has-success]="esValido('tipoTramite')">
+            <select id="tipoTramite" class="form-control" formControlName="tipoTramite">
+              <option value="" disabled selected>Seleccione el tipo de trámite curricular...</option>
+              <option *ngFor="let tramite of listaTramites" [value]="tramite">
+                {{ tramite }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="esInvalido('tipoTramite')" class="error-feedback">
+            <span>Debe seleccionar un tipo de trámite académico.</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="form-group col-12">
+          <label for="descripcionDetalle" class="form-label">
+            <span>ASUNTO</span>
+            <span class="required-asterisk">*</span>
+          </label>
+          <div class="input-wrapper" [class.has-error]="esInvalido('descripcionDetalle')"
+            [class.has-success]="esValido('descripcionDetalle')">
+            <input id="descripcionDetalle" type="text" class="form-control" formControlName="descripcionDetalle"
+              placeholder="Ej: Retiro del curso x" />
+          </div>
+          <div *ngIf="esInvalido('descripcionDetalle')" class="error-feedback">
+            <span *ngIf="f['descripcionDetalle'].errors?.['required']">La descripción breve es obligatoria.</span>
+            <span *ngIf="f['descripcionDetalle'].errors?.['minlength']">Ingrese al menos 5 caracteres.</span>
+            <span *ngIf="f['descripcionDetalle'].errors?.['maxlength']">La descripción no puede exceder 100 caracteres.</span>
+            <span *ngIf="f['descripcionDetalle'].errors?.['soloEspacios']">No se permiten solo espacios en blanco.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 3: Datos del Estudiante (Código y Correo Vinculados) -->
+      <div class="form-row">
+
+        <div class="form-group col-6">
+          <label for="estudianteCodigo" class="form-label">
+            <span>CÓDIGO DE ESTUDIANTE</span>
+            <span class="required-asterisk">*</span>
+          </label>
+          <div class="input-wrapper" [class.has-error]="esInvalido('estudianteCodigo')"
+            [class.has-success]="esValido('estudianteCodigo')">
+            <input id="estudianteCodigo" type="text" class="form-control" formControlName="estudianteCodigo"
+              placeholder="Ej: ISIL-742910 o 8 dígitos" />
+          </div>
+          <div *ngIf="esInvalido('estudianteCodigo')" class="error-feedback">
+            <span *ngIf="f['estudianteCodigo'].errors?.['required']">El código de estudiante es obligatorio.</span>
+            <span *ngIf="f['estudianteCodigo'].errors?.['pattern']">Formato inválido (Ej: ISIL-123456 o 8 dígitos).</span>
+            <span *ngIf="f['estudianteCodigo'].errors?.['soloEspacios']">No se permiten solo espacios en blanco.</span>
+          </div>
+        </div>
+
+        <!-- Correo Institucional -->
+        <div class="form-group col-6">
+          <label for="estudianteEmail" class="form-label">
+            <span>CORREO INSTITUCIONAL</span>
+            <span class="required-asterisk">*</span>
+          </label>
+          <div class="input-wrapper" [class.has-error]="esInvalido('estudianteEmail')"
+            [class.has-success]="esValido('estudianteEmail')">
+            <input id="estudianteEmail" type="email" class="form-control" formControlName="estudianteEmail"
+              placeholder="usuario@isil.pe" />
+          </div>
+          <div *ngIf="esInvalido('estudianteEmail')" class="error-feedback">
+            <span *ngIf="f['estudianteEmail'].errors?.['required']">El correo institucional es obligatorio.</span>
+            <span *ngIf="f['estudianteEmail'].errors?.['correoInvalido']">Ingrese un formato de correo electrónico válido.</span>
+            <span *ngIf="f['estudianteEmail'].errors?.['dominioNoInstitucional']">Debe ser un correo institucional (@isil.pe o @isil.edu.pe).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fila 4: Justificación del Caso con Contador -->
+      <div class="form-row">
+        <div class="form-group col-12">
+          <div class="label-with-counter">
+            <label for="justificacion" class="form-label">
+              <span>JUSTIFICACIÓN DEL CASO</span>
+              <span class="required-asterisk">*</span>
+            </label>
+            <span class="char-counter" [class.counter-error]="conteoCaracteres < 20 || conteoCaracteres > 500">
+              {{ conteoCaracteres }} / 500 caracteres
+            </span>
+          </div>
+          <div class="input-wrapper" [class.has-error]="esInvalido('justificacion')"
+            [class.has-success]="esValido('justificacion')">
+            <textarea id="justificacion" rows="4" class="form-control textarea-control" formControlName="justificacion"
+              placeholder="Describa con claridad los motivos de su solicitud "></textarea>
+          </div>
+          <div *ngIf="esInvalido('justificacion')" class="error-feedback">
+            <span *ngIf="f['justificacion'].errors?.['required']">Escriba la justificacion del caso - min 20 caracteres.</span>
+            <span *ngIf="f['justificacion'].errors?.['minlength']">Escriba la justificacion del caso - min 20 caracteres.</span>
+            <span *ngIf="f['justificacion'].errors?.['maxlength']">Ha superado el límite máximo de 500 caracteres.</span>
+            <span *ngIf="f['justificacion'].errors?.['soloEspacios']">No se admiten solo espacios en blanco.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acciones de Formulario -->
+      <div class="form-actions">
+        <a routerLink="/bandeja" class="btn-cancel">
+          Cancelar
+        </a>
+
+        <button type="submit" class="btn-submit" [disabled]="solicitudForm.invalid || guardando()" title="Radicar solicitud oficial">
+          <svg class="submit-icon" [class.rotating]="guardando()" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          <span>{{ guardando() ? 'Enviando a la API...' : 'Enviar Solicitud' }}</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- Mensaje de éxito (parte inferior) -->
+    <p *ngIf="mensajeExito()" class="success-message">Solicitud hecha!</p>
+  </div>
+</section>
